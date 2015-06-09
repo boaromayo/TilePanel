@@ -1,0 +1,147 @@
+/** PSEUDOCODE FOR BUILDING A CHUNK OF TILES **
+Chunk class
+	make position coords (x,y)
+	make tile sizes (w,h)
+	make the row and column limits 
+	
+	make a chunk of characters/integers for console output for debug
+	make a chunk of tiles
+	
+	make limit of tiles in one chunk
+	
+	constructor
+		initialize number of tiles in a chunk
+		initialize size of one tile
+		initialize row and column limits
+		initialize tile and char chunk limit of rows by columns
+	
+	load the chunk
+		if file loads ok
+			call in file reader
+			set white space as delimiter
+		
+			for each row in the chunk
+				read one line of file
+				split each character to their separate tokens, delimiter separates the tokens
+			
+				for each column
+					read each character token
+					insert a tile and character into respective chunks
+			
+		else
+			call an exception
+	
+	draw tiles
+		for each row
+			for each column
+				draw the tile
+	
+	make set and get methods:
+	set position
+	get tile size
+	get row and column
+	get chunk
+	get chunk size
+	set and get tile character index
+	
+	replace tiles
+		ask the character
+		for each row
+			for each column
+				access index and replace tile with inputted character
+			
+end Chunk class
+
+** END PSEUDOCODE **/
+
+/** PSEUDOCODE TO BUILD A CURSOR **
+Cursor class
+	make position coords (x,y)
+	make tile coords (tx,ty)
+	make cursor size (w,h)
+	
+	constructor
+		check tile bounds
+			
+		set cursor size
+		convert cursor coordinates to tile coordinates
+		
+		set movements and key states to false
+		
+		set current map chunk
+	
+	when checking tile bounds
+		if cursor is over or under the map
+			change position to 0
+		else
+			change position to assigned
+	
+	set the position
+	
+	set the tile position
+		convert cursor coordinates to tile coordinates
+		
+	update the cursor
+		if a key is pressed
+			update the cursor
+			set directional position by tile coordinate
+		
+		set move cursor
+	
+	move cursor
+		if cursor is within bounds
+			
+			if key is pressed
+				set cursor position as direction position
+				set pressed key to false
+		
+		set cursor movement to false
+	
+	check key press
+		if key is pressed
+			set cursor movement true
+			set pressed key true
+	
+	check key release
+		if key is released
+			set cursor movement false
+			set pressed key false
+			
+	draw cursor
+		draw rectangle representing cursor
+		draw tile coordinates
+		
+	make set and get methods
+
+end Cursor class
+
+** END PSEUDOCODE **/
+
+/** PSEUDOCODE TO BUILD A MOUSE CURSOR **/
+MouseCursor class
+	inherits from Cursor class
+	
+	make cursor size (w,h)
+	
+	constructor
+		set cursor size
+		
+		set current map chunk
+	
+	set focus on tile if mouse is hovering on tile
+		check corners for selected tile
+		
+		also check bounds if mouse is off-screen
+	
+	check corners for focused tile
+		set tile coordinates
+		set tile size
+		
+		return value if mouse is hovering on tile
+		
+	draw cursor
+		based on selected tile
+		draw rectangle representing cursor
+		
+end MouseCursor class
+** END PSEUDOCODE **/
