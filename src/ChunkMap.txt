@@ -1,0 +1,67 @@
+import java.io.*;
+import java.awt.*;
+import java.awt.image.*;
+
+public class ChunkMap {
+	/**======================================
+	// VARIABLES.
+	//======================================*/
+	private Chunk[][] chunks;
+	private int rowchunks;
+	private int colchunks;
+	
+	/**========================================
+	// CONSTRUCTOR(row,col,size).
+	//=========================================*/
+	public ChunkMap(int r, int c, int size) {
+		rowchunks = r;
+		colchunks = c;
+		chunks = new Chunk[rowchunks][colchunks];
+		
+		for (int row = 0; row < rowchunks; row++) {
+			for (int col = 0; col < colchunks; col++) {
+				chunks[row][col] = new Chunk(size);
+			}
+		}
+	}
+	
+	/**========================================
+	// CONSTRUCTOR(row,col,size,filenames).
+	//=========================================*/
+	public ChunkMap(int r, int c, int size, String[][] filenames) {
+		rowchunks = r;
+		colchunks = c;
+		chunks = new Chunk[rowchunks][colchunks];
+		
+		for (int row = 0; row < rowchunks; row++) {
+			for (int col = 0; col < colchunks; col++) {
+				chunks[row][col] = new Chunk(size);
+			}
+		}
+		
+		loadMap(filenames);
+	}
+	
+	public void loadMap(String[][] files) {
+		for (int row = 0; row < files.length; row++) {
+			for (int col = 0; col < files[row].length; col++) {
+				chunks[row][col].loadChunk(files[row][col]);
+			}
+		}
+	}
+	
+	public void setPosition(int r, int c, int x, int y) {
+		chunks[r][c].setx(x); // Set x-coord of selected chunk
+		chunks[r][c].sety(y); // Set y-coord of selected chunk
+	}
+	
+	public Chunk[][] getMap() { return chunks; }
+	
+	public Chunk getChunk(int row, int col) { return chunks[row][col]; }
+	
+	public void loadChunk(int row, int col, String filename) { chunks[row][col].loadChunk(filename); }
+	
+	public void setTile(int r1, int c1, int r2, int c2, char i) { chunks[r1][c1].setTile(r2,c2,i); }
+	
+	public void replaceTile(int row, int col, char c1, char c2) { chunks[row][col].replace(c1,c2); }
+}		
